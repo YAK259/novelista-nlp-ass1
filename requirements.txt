@@ -1,0 +1,6 @@
+pandas
+nltk
+spacy
+matplotlib
+seaborn
+jupyter

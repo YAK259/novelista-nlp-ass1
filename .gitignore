@@ -1,0 +1,16 @@
+# Raw data (DO NOT COMMIT)
+data/raw/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Jupyter artifacts
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
