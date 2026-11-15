@@ -67,10 +67,13 @@ def clean_novel_text(text):
     return cleaned_text
 
 def calculate_vocab_size(text_series):
-    """Calculates total unique words (types) across the corpus."""
     all_words = []
     for text in text_series:
-        all_words.extend(text.split())
+        # Safely handle both strings and lists to prevent AttributeErrors
+        if isinstance(text, list):
+            all_words.extend(text)
+        elif isinstance(text, str):
+            all_words.extend(text.split())
     return len(set(all_words))
 
 if __name__ == "__main__":
@@ -79,7 +82,7 @@ if __name__ == "__main__":
     
     print("Calculating pre-cleaning vocabulary size...")
     # Quick token count for raw text
-    raw_vocab = calculate_vocab_size(df['raw_text'].apply(lambda x: re.sub(r'[^a-zA-Z\s]', '', x).lower().split()))
+    raw_vocab = calculate_vocab_size(df['raw_text'].apply(lambda x: re.sub(r'[^a-zA-Z\s]', '', str(x)).lower()))
     
     print("Applying cleaning pipeline...")
     df['cleaned_text'] = df['raw_text'].apply(clean_novel_text)
